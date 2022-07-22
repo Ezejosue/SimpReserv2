@@ -28,4 +28,15 @@ public class User {
   @Column(length = 15, nullable = false, name = "last_name")
   @Getter @Setter
   private String lastName;
+
+  @Override
+  public String toString() {
+    return "User{" +
+        "id=" + id +
+        ", email='" + email + '\'' +
+        ", password='" + password + '\'' +
+        ", firstName='" + firstName + '\'' +
+        ", lastName='" + lastName + '\'' +
+        '}';
+  }
 }
