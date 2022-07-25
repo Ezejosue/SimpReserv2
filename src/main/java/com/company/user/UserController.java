@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -23,13 +24,39 @@ public class UserController {
   @GetMapping("/users/new")
   public String showNewForm(Model model){
     model.addAttribute("user", new User());
+    model.addAttribute("pageTittle", "Add New User");
     return "user_form";
   }
 
   @PostMapping("/users/save")
   public String saveUser(User user, RedirectAttributes ra){
     service.save(user);
-    ra.addFlashAttribute("message","The user been saved successfully!!");
+      ra.addFlashAttribute("message","The user been saved successfully!!");
+      return "redirect:/users";
+  }
+
+  @GetMapping("/users/edit/{id}")
+  public String showEditForm(@PathVariable("id") Integer id, Model model,  RedirectAttributes ra){
+    try {
+      User user = service.get(id);
+      model.addAttribute("user", user);
+      model.addAttribute("pageTittle", "Edit User (ID: "+ id +")");
+      ra.addFlashAttribute("message","The user ID " + id + " has been updated");
+      return "user_form";
+    } catch (UserNotFoundException e) {
+      ra.addFlashAttribute("message",e.getMessage());
+      return "redirect:/users";
+    }
+  }
+
+  @GetMapping("/users/delete/{id}")
+  public String deleteUser(@PathVariable("id") Integer id, RedirectAttributes ra){
+    try {
+      service.delete(id);
+      ra.addFlashAttribute("message","The user ID " + id + " has been eliminated");
+    } catch (UserNotFoundException e) {
+      ra.addFlashAttribute("message",e.getMessage());
+    }
     return "redirect:/users";
   }
 }
