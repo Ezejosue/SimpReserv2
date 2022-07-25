@@ -29,6 +29,8 @@ public class User {
   @Getter @Setter
   private String lastName;
 
+  @Setter @Getter
+  private boolean enabled;
   @Override
   public String toString() {
     return "User{" +
@@ -37,6 +39,7 @@ public class User {
         ", password='" + password + '\'' +
         ", firstName='" + firstName + '\'' +
         ", lastName='" + lastName + '\'' +
+        ", lastName='" + enabled + '\'' +
         '}';
   }
 }
