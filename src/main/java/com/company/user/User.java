@@ -1,5 +1,6 @@
 package com.company.user;
 
+import java.util.Collection;
 import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,6 +32,7 @@ public class User {
 
   @Setter @Getter
   private boolean enabled;
+
   @Override
   public String toString() {
     return "User{" +

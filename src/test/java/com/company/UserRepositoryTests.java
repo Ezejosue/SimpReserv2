@@ -2,13 +2,13 @@ package com.company;
 
 import com.company.user.User;
 import com.company.user.UserRepository;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import java.util.Optional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
 @DataJpaTest
@@ -16,6 +16,7 @@ import org.springframework.test.annotation.Rollback;
 @Rollback(false)
 public class UserRepositoryTests {
   @Autowired private UserRepository repo;
+  @Autowired private TestEntityManager entityManager;
 
   @Test
   public void testAddNew(){
@@ -25,6 +26,8 @@ public class UserRepositoryTests {
     user.setFirstName("Harold");
     user.setLastName("Garcia");
     User savedUser = repo.save(user);
+    User existUser = entityManager.find(User.class,savedUser.getId());
+    Assertions.assertThat(existUser.getEmail()).isEqualTo(user.getEmail());
     Assertions.assertThat(savedUser).isNotNull();
     Assertions.assertThat(savedUser.getId()).isGreaterThan(0);
 
@@ -65,5 +68,12 @@ public class UserRepositoryTests {
     repo.deleteById(userid);
     Optional<User> optionalUser = repo.findById(userid);
     Assertions.assertThat(optionalUser).isNotPresent();
+  }
+
+  @Test
+  public void testFindUserByEmail(){
+    String email = "aezequiel56@gmail.com";
+    User user = repo.findByEmail(email);
+    Assertions.assertThat(user).isNotNull();
   }
 }
