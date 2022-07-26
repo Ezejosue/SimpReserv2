@@ -7,6 +7,12 @@
 </head>
 <body>
 <div class="container-fluid text-center">
+  <form th:action="@{/logout}" method="post">
+    <p>
+      Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+    </p>
+    <input type="submit" value="Sign Out">
+  </form>
   <div>
     <h2>Manage Users</h2>
   </div>
