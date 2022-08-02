@@ -1,7 +1,7 @@
-package com.company;
+package com.simpreserv.controller;
 
-import com.company.user.User;
-import com.company.user.UserRepository;
+import com.simpreserv.model.User;
+import com.simpreserv.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package com.company.user;
+package com.simpreserv.model;
 
 public class UserNotFoundException extends Throwable {
 

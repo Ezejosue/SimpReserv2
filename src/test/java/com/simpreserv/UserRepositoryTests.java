@@ -1,7 +1,7 @@
-package com.company;
+package com.simpreserv;
 
-import com.company.user.User;
-import com.company.user.UserRepository;
+import com.simpreserv.model.User;
+import com.simpreserv.repository.UserRepository;
 import java.util.Optional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

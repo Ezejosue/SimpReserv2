@@ -1,5 +1,8 @@
-package com.company.user;
+package com.simpreserv.controller;
 
+import com.simpreserv.model.User;
+import com.simpreserv.model.UserNotFoundException;
+import com.simpreserv.service.UserService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

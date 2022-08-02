@@ -1,5 +1,8 @@
-package com.company.user;
+package com.simpreserv.service;
 
+import com.simpreserv.model.User;
+import com.simpreserv.repository.UserRepository;
+import com.simpreserv.repository.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

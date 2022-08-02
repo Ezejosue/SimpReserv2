@@ -1,6 +1,5 @@
-package com.company.user;
+package com.simpreserv.model;
 
-import java.util.Collection;
 import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
