@@ -9,11 +9,11 @@
     <version>2.7.2</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
-  <groupId>com.company</groupId>
-  <artifactId>FirtsWebApp</artifactId>
+  <groupId>org.kodigo</groupId>
+  <artifactId>SimpReserv2</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>FirtsWebApp</name>
-  <description>FirtsWebApp</description>
+  <name>SimpReserv2</name>
+  <description>SimpReserv2</description>
   <properties>
     <java.version>18</java.version>
   </properties>

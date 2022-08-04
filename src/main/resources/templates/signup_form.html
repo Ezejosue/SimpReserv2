@@ -31,15 +31,15 @@
 
                 <form th:action="@{/process_register}" method="post" th:object="${user}">
 
-                  <input type="hidden" th:field="*{id}">
-                  <div class="bo  rder border-secondary rounded p-3">
+                  <input type="hidden" th:field="*{userId}">
+                  <div class="border border-secondary rounded p-3">
                     <div class="input-group row m-2">
                       <label class="col-sm-4 col-form-label">E-mail:</label>
                       <div class="col-sm-8">
                         <input type="email" th:field="*{email}" class="form-control" required minlength="8" maxlength="45">
                       </div>
                     </div>
-                    <div class="input-group row m-2">
+                    <!--<div class="input-group row m-2">
                       <label class="col-sm-4 col-form-label">First Name:</label>
                       <div class="col-sm-8">
                         <input type="text" th:field="*{firstName}" class="form-control" required minlength="2" maxlength="45">
@@ -50,11 +50,23 @@
                       <div class="col-sm-8">
                         <input type="text" th:field="*{lastName}" class="form-control" required minlength="2" maxlength="45">
                       </div>
-                    </div>
+                    </div>-->
                     <div class="input-group row m-2">
                       <label class="col-sm-4 col-form-label">Password:</label>
                       <div class="col-sm-8">
                         <input type="password" th:field="*{password}" class="form-control" required minlength="8" maxlength="45">
+                      </div>
+                    </div>
+                    <div class="input-group row m-2">
+                      <label class="col-sm-4 col-form-label">Employee Id:</label>
+                      <div class="col-sm-8">
+                        <input type="text" th:field="*{employeeId}" class="form-control" required minlength="1" maxlength="3">
+                      </div>
+                    </div>
+                    <div class="input-group row m-2">
+                      <label class="col-sm-4 col-form-label">User Type Id:</label>
+                      <div class="col-sm-8">
+                        <input type="text" th:field="*{userTypeId}" class="form-control" required minlength="1" maxlength="3">
                       </div>
                     </div>
 
@@ -64,7 +76,6 @@
                   <a href="#!" class="small text-muted">Terms of use.</a>
                   <a href="#!" class="small text-muted">Privacy policy</a>
                 </form>
-
               </div>
             </div>
           </div>
