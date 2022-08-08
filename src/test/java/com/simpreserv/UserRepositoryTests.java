@@ -44,7 +44,7 @@ public class UserRepositoryTests {
 
   @Test
   public void testUpdate(){
-    Integer userid = 1;
+    Integer userid = 3;
     Optional<User> optionalUser = repo.findById(userid);
     User user = optionalUser.get();
     user.setPassword("Hello2000");

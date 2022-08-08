@@ -29,6 +29,7 @@
           <th>ID</th>
           <th>E-mail</th>
           <th>Enabled</th>
+          <th>Type</th>
           <th></th>
         </tr>
       </thead>
@@ -38,6 +39,8 @@
             <td>[[${user.userId}]]</td>
             <td>[[${user.email}]]</td>
             <td>[[${user.enabled}]]</td>
+            <td>[[${user.userTypeId}]]</td>
+
             <td>
               <a class="h4 mr-3" th:href="@{'/users/edit/' + ${user.userId}}">Edit</a>
               <a class="h4" th:href="@{'/users/delete/' + ${user.userId}}">Delete</a>
