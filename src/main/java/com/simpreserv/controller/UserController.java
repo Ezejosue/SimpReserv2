@@ -5,6 +5,7 @@ import com.simpreserv.model.UserNotFoundException;
 import com.simpreserv.service.UserService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +18,10 @@ public class UserController {
   @Autowired private UserService userService;
 
   @GetMapping("/users")
-  public String showUsersList(Model model){
-    List<User> listUsers = userService.listAll();
+  public String showUsersList(Model model, @Param("keyword") String keyword){
+    List<User> listUsers = userService.listAll(keyword);
     model.addAttribute("listUsers", listUsers);
+    model.addAttribute("keyword", keyword);
     return "users";
   }
 

@@ -19,10 +19,27 @@
   <div class="m-2">
     <a class="h3" th:href="@{/users/new}">Add new User</a>
   </div>
+  <div>
+      &nbsp;
+  </div>
+  <div>
+    <form th:action="@{/users}" th:value="${keyword}">
+      Filter: <input type="text" name="keyword" required>
+      &nbsp;
+      <input type="submit" value="Search">
+      &nbsp;
+      <input type="button" value="Clear" onclick="clearFilter()">
+    </form>
+  </div>
+  <div>
+    &nbsp;
+  </div>
   <div th:if="${message}" class="alert alert-success text-center">
     [[${message}]]
   </div>
   <div>
+    <div>
+
     <table class="table table-bordered">
       <thead class="table-dark">
         <tr>
@@ -49,8 +66,15 @@
         </th:block>
       </tboby>
     </table>
+    </div>
+
   </div>
 
 </div>
+<script type="text/javascript">
+  function clearFilter() {
+    window.location = "/users"
+  }
+</script>
 </body>
 </html>
