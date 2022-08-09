@@ -2,7 +2,6 @@ package com.simpreserv.service;
 
 import com.simpreserv.model.Employee;
 import com.simpreserv.model.NotFoundException;
-import com.simpreserv.model.User;
 import com.simpreserv.repository.EmployeeRepository;
 import java.util.List;
 import java.util.Optional;

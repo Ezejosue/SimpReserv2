@@ -1,4 +1,4 @@
-package com.simpreserv;
+package com.simpreserv.repositorytest;
 
 import com.simpreserv.model.User;
 import com.simpreserv.repository.UserRepository;

@@ -2,7 +2,6 @@ package com.simpreserv.controller;
 
 import com.simpreserv.model.Employee;
 import com.simpreserv.model.NotFoundException;
-import com.simpreserv.model.User;
 import com.simpreserv.service.EmployeeService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

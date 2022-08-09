@@ -1,9 +1,10 @@
-package com.simpreserv;
+package com.simpreserv.repositorytest;
 
 import com.simpreserv.model.Employee;
 import com.simpreserv.repository.EmployeeRepository;
 import java.util.Optional;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -35,8 +36,6 @@ public class EmployeeRepositoryTest {
     Assertions.assertThat(existEmployee.getCarnet()).isEqualTo(employee.getCarnet());
     Assertions.assertThat(savedEmployee).isNotNull();
     Assertions.assertThat(savedEmployee.getEmployeeId()).isGreaterThan(0);
-
-
   }
 
   @Test
