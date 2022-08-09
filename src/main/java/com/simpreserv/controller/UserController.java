@@ -1,7 +1,7 @@
 package com.simpreserv.controller;
 
 import com.simpreserv.model.User;
-import com.simpreserv.model.UserNotFoundException;
+import com.simpreserv.model.NotFoundException;
 import com.simpreserv.service.UserService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class UserController {
       model.addAttribute("pageTitle", "Edit User (ID: "+ id +")");
       ra.addFlashAttribute("message","The user ID " + id + " has been updated");
       return "user_form";
-    } catch (UserNotFoundException e) {
+    } catch (NotFoundException e) {
       ra.addFlashAttribute("message",e.getMessage());
       return "redirect:/users";
     }
@@ -59,7 +59,7 @@ public class UserController {
     try {
       userService.delete(id);
       ra.addFlashAttribute("message","The user ID " + id + " has been eliminated");
-    } catch (UserNotFoundException e) {
+    } catch (NotFoundException e) {
       ra.addFlashAttribute("message",e.getMessage());
     }
     return "redirect:/users";

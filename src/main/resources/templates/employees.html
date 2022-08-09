@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Employees</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.css}">
+</head>
+<body>
+<div class="container-fluid text-center">
+  <form th:action="@{/logout}" method="post">
+    <p>
+      Welcome <b>[[${#request.userPrincipal.principal.Username}]]</b>
+    </p>
+    <input type="submit" value="Sign Out">
+  </form>
+  <div>
+    <h2>Manage Employees</h2>
+  </div>
+  <div class="m-2">
+    <a class="h3" th:href="@{/employees/new}">Add New Employee</a>
+  </div>
+  <div>
+      &nbsp;
+  </div>
+  <div>
+    <form th:action="@{/employees}" th:value="${keyword}">
+      Filter: <input type="text" name="keyword" required>
+      &nbsp;
+      <input type="submit" value="Search">
+      &nbsp;
+      <input type="button" value="Clear" onclick="clearFilter()">
+    </form>
+  </div>
+  <div>
+    &nbsp;
+  </div>
+  <div th:if="${message}" class="alert alert-success text-center">
+    [[${message}]]
+  </div>
+  <div>
+    <div>
+
+    <table class="table table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>FirstName</th>
+          <th>LastName</th>
+          <th>Carnet</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tboby>
+        <th:block th:each="employee : ${listEmployees}">
+          <tr>
+            <td>[[${employee.employeeId}]]</td>
+            <td>[[${employee.firstName}]]</td>
+            <td>[[${employee.lastName}]]</td>
+            <td>[[${employee.carnet}]]</td>
+
+            <td>
+              <a class="h4 mr-3" th:href="@{'/employee/edit/' + ${employee.employeeId}}">Edit</a>
+              <a class="h4" th:href="@{'/employee/delete/' + ${employee.employeeId}}">Delete</a>
+            </td>
+          </tr>
+        </th:block>
+      </tboby>
+    </table>
+    </div>
+
+  </div>
+
+</div>
+<script type="text/javascript">
+  function clearFilter() {
+    window.location = "/employees"
+  }
+</script>
+</body>
+</html>

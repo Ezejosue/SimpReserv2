@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>[[${pageTitle}]]</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.css}">
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="text-center">   <h2>[[${pageTitle}]]  </h2> </div>
+     <form th:action="@{/employees/save}" method="post" th:object="${employee}"
+           style="max-width: 500px; margin: 0 auto">
+       <input type="hidden" th:field="*{employeeId}">
+       <div class="border border-secondary rounded p-3">
+         <div class="input-group row m-2">
+           <label class="col-sm-4 col-form-label">FirstName:</label>
+           <div class="col-sm-8">
+             <input type="text" th:field="*{firstName}" class="form-control" required minlength="2" maxlength="45">
+           </div>
+         </div>
+         <div class="input-group row m-2">
+           <label class="col-sm-4 col-form-label">LastName:</label>
+           <div class="col-sm-8">
+             <input type="text" th:field="*{lastName}" class="form-control" required minlength="2" maxlength="45">
+           </div>
+         </div>
+         <div class="input-group row m-2">
+           <label class="col-sm-4 col-form-label">Carnet:</label>
+           <div class="col-sm-8">
+             <input type="text" th:field="*{carnet}" class="form-control" required minlength="8" maxlength="8">
+           </div>
+         </div>
+         <div class="input-group row m-2">
+           <label class="col-sm-4 col-form-label">Enable:</label>
+           <div class="col-sm-8">
+             <input type="checkbox" th:field="*{enabled}">
+           </div>
+         </div>
+         <div class="input-group row m-2">
+           <label class="col-sm-4 col-form-label">Position ID:</label>
+           <div class="col-sm-8">
+             <input type="text" th:field="*{positionId}" class="form-control" required minlength="1" maxlength="2">
+           </div>
+         </div>
+         <div class="input-group row m-2">
+           <label class="col-sm-4 col-form-label">Shift Type:</label>
+           <div class="col-sm-8">
+             <input type="text" th:field="*{shiftId}" class="form-control" required minlength="1" maxlength="2">
+           </div>
+         </div>
+         <div class="text-center">
+           <button type="submit" class="btn btn-primary m-2">Save</button>
+           <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
+         </div>
+       </div>
+     </form>
+  </div>
+  <script type="text/javascript">
+    function cancelForm() {
+      window.location = "[[@{/employees}]]"
+    }
+  </script>
+</body>
+</html>

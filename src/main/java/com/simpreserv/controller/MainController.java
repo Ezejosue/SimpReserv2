@@ -13,20 +13,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class MainController {
-  @Autowired private UserRepository userRepository;
+
+  @Autowired
+  private UserRepository userRepository;
+
   @GetMapping("")
-  public String viewHomePage(){
+  public String viewHomePage() {
     return "index";
   }
 
   @GetMapping("/register")
-  public String showSignUpForm(Model model){
+  public String showSignUpForm(Model model) {
     model.addAttribute("user", new User());
     return "signup_form";
   }
 
   @PostMapping("/process_register")
-  public String processRegistration(User user){
+  public String processRegistration(User user) {
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     String encodedPassword = encoder.encode(user.getPassword());
     user.setPassword(encodedPassword);
@@ -36,7 +39,12 @@ public class MainController {
   }
 
   @GetMapping("/list_users")
-  public String viewUsersList(){
+  public String viewUsersList() {
     return "users";
+  }
+
+  @GetMapping("/list_employees")
+  public String viewEmployeesList() {
+    return "employees";
   }
 }

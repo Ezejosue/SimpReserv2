@@ -23,8 +23,6 @@ public class UserRepositoryTests {
     User user = new User();
     user.setEmail("cazooklei@gmail.com");
     user.setPassword("user2345");
-    //user.setFirstName("Harold");
-    //user.setLastName("Garcia");
     User savedUser = repo.save(user);
     User existUser = entityManager.find(User.class,savedUser.getUserId());
     Assertions.assertThat(existUser.getEmail()).isEqualTo(user.getEmail());
