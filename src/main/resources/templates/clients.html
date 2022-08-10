@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Clients</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.css}">
+</head>
+<body>
+<div class="container-fluid text-center">
+  <form th:action="@{/logout}" method="post">
+    <p>
+      Welcome <b>[[${#request.userPrincipal.principal.Username}]]</b>
+    </p>
+    <input type="submit" value="Sign Out">
+  </form>
+  <div>
+    <h2>Manage Clients</h2>
+  </div>
+  <div class="m-2">
+    <a class="h3" th:href="@{/clients/new}">Add New Client</a>
+  </div>
+  <div>
+      &nbsp;
+  </div>
+  <div>
+    <form th:action="@{/clients}" th:value="${keyword}">
+      Filter: <input type="text" name="keyword" required>
+      &nbsp;
+      <input type="submit" value="Search">
+      &nbsp;
+      <input type="button" value="Clear" onclick="clearFilter()">
+    </form>
+  </div>
+  <div>
+    &nbsp;
+  </div>
+  <div th:if="${message}" class="alert alert-success text-center">
+    [[${message}]]
+  </div>
+  <div>
+    <div>
+
+    <table class="table table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Doc Number</th>
+          <th>eMail</th>
+          <th>Enabled</th>
+        </tr>
+      </thead>
+      <tboby>
+        <th:block th:each="client : ${listClients}">
+          <tr>
+            <td>[[${client.clientId}]]</td>
+            <td>[[${client.firstName}]]</td>
+            <td>[[${client.lastName}]]</td>
+            <td>[[${client.docNumber}]]</td>
+            <td>[[${client.email}]]</td>
+            <td>[[${client.enabled}]]</td>
+            <td>
+              <a class="h4 mr-3" th:href="@{'/clients/edit/' + ${client.clientId}}">Edit</a>
+              <a class="h4" th:href="@{'/clients/delete/' + ${client.clientId}}">Delete</a>
+            </td>
+          </tr>
+        </th:block>
+      </tboby>
+    </table>
+    </div>
+
+  </div>
+
+</div>
+<script type="text/javascript">
+  function clearFilter() {
+    window.location = "/clients"
+  }
+</script>
+</body>
+</html>
