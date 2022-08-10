@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 public class UserService {
   @Autowired private UserRepository userRepository;
 
+  public List<User> listAll(){
+    return userRepository.findAll();
+  }
   public List<User> listAll(String keyword){
     if (keyword != null){
       return userRepository.findAll(keyword);
