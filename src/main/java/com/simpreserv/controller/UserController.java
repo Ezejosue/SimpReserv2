@@ -1,5 +1,6 @@
 package com.simpreserv.controller;
 
+import com.simpreserv.util.UserEXCELExporter;
 import com.simpreserv.util.UserPDFExporter;
 import com.simpreserv.model.User;
 import com.simpreserv.model.NotFoundException;
@@ -12,6 +13,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +44,9 @@ public class UserController {
 
   @PostMapping("/users/save")
   public String saveUser(User user, RedirectAttributes ra) {
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    String encodedPassword = encoder.encode(user.getPassword());
+    user.setPassword(encodedPassword);
     userService.save(user);
     ra.addFlashAttribute("message", "The user has been saved successfully!!");
     return "redirect:/users";
@@ -86,5 +91,19 @@ public class UserController {
     List<User> userList = userService.listAll();
     UserPDFExporter exporter = new UserPDFExporter(userList);
     exporter.export(response);
+  }
+
+  @GetMapping("/users/exportEXCEL")
+  public void exportToEXCEL(HttpServletResponse response) throws IOException {
+    response.setContentType("application/octet-stream");
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+    String currentDateTime = dateFormat.format(new Date());
+    String headerKey = "Content-Disposition";
+    String headerValue = "attachment; filename=users_"+currentDateTime+".xlsx";
+
+    response.setHeader(headerKey, headerValue);
+    List<User> userList = userService.listAll();
+    UserEXCELExporter excelExporter = new UserEXCELExporter(userList);
+    excelExporter.export(response);
   }
 }
