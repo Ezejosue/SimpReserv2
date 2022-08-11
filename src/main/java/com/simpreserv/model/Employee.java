@@ -21,7 +21,7 @@ public class Employee {
   private Integer employeeId;
 
   @CreationTimestamp
-  @Column(name = "create_time")
+  @Column(name = "create_time", updatable = false)
   @Getter @Setter
   private Timestamp createTime;
 

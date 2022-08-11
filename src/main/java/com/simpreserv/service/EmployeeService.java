@@ -3,6 +3,8 @@ package com.simpreserv.service;
 import com.simpreserv.model.Employee;
 import com.simpreserv.model.NotFoundException;
 import com.simpreserv.repository.EmployeeRepository;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +22,7 @@ public class EmployeeService {
     return employeeRepository.findAll();
   }
 
-  public void save(Employee employee) {
-    employeeRepository.save(employee);
-  }
+  public void save(Employee employee) {employeeRepository.save(employee);}
 
   public Employee get(Integer id) throws NotFoundException {
     Optional<Employee> result = employeeRepository.findById(id);
