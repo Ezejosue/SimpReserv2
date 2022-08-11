@@ -1,7 +1,6 @@
 package com.simpreserv.util;
 
 import com.simpreserv.model.Client;
-import com.simpreserv.model.User;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletOutputStream;
@@ -83,5 +82,4 @@ public class ClientEXCELExporter {
     workbook.close();
     outputStream.close();
   }
-
 }

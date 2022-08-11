@@ -2,12 +2,9 @@ package com.simpreserv.controller;
 
 import com.simpreserv.model.Client;
 import com.simpreserv.model.NotFoundException;
-import com.simpreserv.model.User;
 import com.simpreserv.service.ClientService;
 import com.simpreserv.util.ClientEXCELExporter;
 import com.simpreserv.util.ClientPDFExporter;
-import com.simpreserv.util.UserEXCELExporter;
-import com.simpreserv.util.UserPDFExporter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

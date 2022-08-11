@@ -46,7 +46,6 @@ public class ClientPDFExporter {
 
     pdfPCell.setPhrase(new Phrase("Enabled", font));
     table.addCell(pdfPCell);
-
   }
 
   private void writeTableData(PdfPTable table) {
@@ -80,5 +79,4 @@ public class ClientPDFExporter {
 
     document.close();
   }
-
 }
