@@ -4,11 +4,9 @@ import com.simpreserv.model.Employee;
 import com.simpreserv.repository.EmployeeRepository;
 import java.util.Optional;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
@@ -18,10 +16,8 @@ import org.springframework.test.annotation.Rollback;
 @Rollback(false)
 public class EmployeeRepositoryTest {
 
-  @Autowired
-  private EmployeeRepository repo;
-  @Autowired
-  private TestEntityManager entityManager;
+  @Autowired private EmployeeRepository repo;
+  @Autowired private TestEntityManager entityManager;
 
   @Test
   public void testAddNew() {
@@ -48,7 +44,7 @@ public class EmployeeRepositoryTest {
   }
 
   @Test
-  public void testUpdate(){
+  public void testUpdate() {
     Integer employeeId = 2;
     Optional<Employee> optionalEmployee = repo.findById(employeeId);
     Employee employee = optionalEmployee.get();
@@ -60,7 +56,7 @@ public class EmployeeRepositoryTest {
   }
 
   @Test
-  public void testGet(){
+  public void testGet() {
     Integer employeeId = 2;
     Optional<Employee> optionalEmployee = repo.findById(employeeId);
     Assertions.assertThat(optionalEmployee).isPresent();
@@ -68,7 +64,7 @@ public class EmployeeRepositoryTest {
   }
 
   @Test
-  public void testDelete(){
+  public void testDelete() {
     Integer employeeId = 2;
     repo.deleteById(employeeId);
     Optional<Employee> optionalEmployee = repo.findById(employeeId);
@@ -76,7 +72,7 @@ public class EmployeeRepositoryTest {
   }
 
   @Test
-  public void testFindByCarnet(){
+  public void testFindByCarnet() {
     String carnet = "GP200123";
     Employee employee = repo.findByCarnet(carnet);
     Assertions.assertThat(employee).isNotNull();

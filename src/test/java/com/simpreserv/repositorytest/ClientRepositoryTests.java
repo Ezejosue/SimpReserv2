@@ -19,33 +19,31 @@ import org.springframework.test.annotation.Rollback;
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(value = false)
 public class ClientRepositoryTests {
-  @Autowired
-  private ClientRepository clientRepository;
+  @Autowired private ClientRepository clientRepository;
 
-  @Autowired
-  private TestEntityManager testEntityManager;
+  @Autowired private TestEntityManager testEntityManager;
 
   @Test
-  public void testListAll(){
+  public void testListAll() {
     Iterable<Client> clients = clientRepository.findAll();
     Assertions.assertThat(clients).hasSizeGreaterThan(0);
-    for (Client client: clients){
+    for (Client client : clients) {
       System.out.println(client);
     }
   }
 
   @Test
-  public void testListByKeyword(){
+  public void testListByKeyword() {
     String keyword = "684610930";
     List<Client> clients = clientRepository.findAll(keyword);
     Assertions.assertThat(clients).doesNotContainNull();
-    for(Client client: clients){
+    for (Client client : clients) {
       System.out.println(client);
     }
   }
 
   @Test
-  public void testAddNew(){
+  public void testAddNew() {
     Client client = new Client();
     client.setFirstName("Jose");
     client.setLastName("Barahona");
@@ -60,7 +58,7 @@ public class ClientRepositoryTests {
   }
 
   @Test
-  public void testUpdate(){
+  public void testUpdate() {
     Integer clientId = 101;
     Optional<Client> optionalClient = clientRepository.findById(clientId);
     Client client = optionalClient.get();
@@ -72,11 +70,10 @@ public class ClientRepositoryTests {
   }
 
   @Test
-  public void testDelete(){
+  public void testDelete() {
     Integer clientId = 101;
     clientRepository.deleteById(clientId);
     Optional<Client> optionalClient = clientRepository.findById(clientId);
     Assertions.assertThat(optionalClient).isNotPresent();
   }
-
 }

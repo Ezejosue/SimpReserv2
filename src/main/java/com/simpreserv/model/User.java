@@ -7,7 +7,6 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-
 @Entity
 @Table(name = "USERS")
 public class User {
@@ -41,9 +40,7 @@ public class User {
   @Setter
   private String password;
 
-  @Getter
-  @Setter
-  private boolean enabled;
+  @Getter @Setter private boolean enabled;
 
   @Column(name = "EMPLOYEES_employee_id", nullable = false)
   @Getter
@@ -55,11 +52,17 @@ public class User {
   @Setter
   private Integer userTypeId;
 
-  public User() {
-  }
+  public User() {}
 
-  public User(Integer userId, Timestamp createTime, Timestamp updateTime, String email,
-      String password, boolean enabled, Integer employeeId, Integer userTypeId) {
+  public User(
+      Integer userId,
+      Timestamp createTime,
+      Timestamp updateTime,
+      String email,
+      String password,
+      boolean enabled,
+      Integer employeeId,
+      Integer userTypeId) {
     this.userId = userId;
     this.createTime = createTime;
     this.updateTime = updateTime;
@@ -72,15 +75,25 @@ public class User {
 
   @Override
   public String toString() {
-    return "User{" +
-        "userId=" + userId +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", email='" + email + '\'' +
-        ", password='" + password + '\'' +
-        ", enabled=" + enabled +
-        ", employeeId=" + employeeId +
-        ", userTypeId=" + userTypeId +
-        '}';
+    return "User{"
+        + "userId="
+        + userId
+        + ", createTime="
+        + createTime
+        + ", updateTime="
+        + updateTime
+        + ", email='"
+        + email
+        + '\''
+        + ", password='"
+        + password
+        + '\''
+        + ", enabled="
+        + enabled
+        + ", employeeId="
+        + employeeId
+        + ", userTypeId="
+        + userTypeId
+        + '}';
   }
 }

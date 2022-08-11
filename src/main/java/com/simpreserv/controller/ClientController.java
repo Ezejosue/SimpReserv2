@@ -16,11 +16,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class ClientController {
 
-  @Autowired
-  private ClientService clientService;
+  @Autowired private ClientService clientService;
 
   @GetMapping("/clients")
-  public String showClientsList(Model model, @Param("keyword") String keyword){
+  public String showClientsList(Model model, @Param("keyword") String keyword) {
     List<Client> listClients = clientService.listAll(keyword);
     model.addAttribute("listClients", listClients);
     model.addAttribute("keyword", keyword);
@@ -28,42 +27,41 @@ public class ClientController {
   }
 
   @GetMapping("/clients/new")
-  public String showNewForm(Model model){
+  public String showNewForm(Model model) {
     model.addAttribute("client", new Client());
     model.addAttribute("pageTitle", "Add New Client");
     return "client_form";
   }
 
   @PostMapping("/clients/save")
-  public String saveClient(Client client, RedirectAttributes ra){
+  public String saveClient(Client client, RedirectAttributes ra) {
     clientService.save(client);
     ra.addFlashAttribute("message", "The client has been saved succesfully!!");
     return "redirect:/clients";
   }
 
   @GetMapping("/clients/edit/{id}")
-  public String showEditForm(@PathVariable("id") Integer id, Model model, RedirectAttributes ra){
-    try{
+  public String showEditForm(@PathVariable("id") Integer id, Model model, RedirectAttributes ra) {
+    try {
       Client client = clientService.get(id);
       model.addAttribute("client", client);
       model.addAttribute("pageTitle", "Edit Client (ID: " + id + ")");
       ra.addFlashAttribute("message", "The Client ID " + id + " has been updated");
       return "client_form";
-    }catch (NotFoundException e){
+    } catch (NotFoundException e) {
       ra.addFlashAttribute("message", e.getMessage());
       return "redirect:/clients";
     }
   }
 
   @GetMapping("/clients/delete/{id}")
-  public String deleteClient(@PathVariable("id") Integer id, RedirectAttributes ra){
-    try{
+  public String deleteClient(@PathVariable("id") Integer id, RedirectAttributes ra) {
+    try {
       clientService.delete(id);
       ra.addFlashAttribute("message", "The Client ID " + id + " has been eliminated");
-    }catch(NotFoundException e){
+    } catch (NotFoundException e) {
       ra.addFlashAttribute("message", e.getMessage());
     }
     return "redirect:/clients";
   }
-
 }

@@ -3,7 +3,6 @@ package com.simpreserv.util;
 import com.simpreserv.model.User;
 import java.io.IOException;
 import java.util.List;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.poi.ss.usermodel.Cell;
@@ -34,10 +33,10 @@ public class UserEXCELExporter {
     font.setFontHeight(16);
     style.setFont(font);
 
-    createCell(row, 0,"User ID", style);
-    createCell(row, 1,"E-mail", style);
-    createCell(row, 2,"Enabled", style);
-    createCell(row, 3,"Type", style);
+    createCell(row, 0, "User ID", style);
+    createCell(row, 1, "E-mail", style);
+    createCell(row, 2, "Enabled", style);
+    createCell(row, 3, "Type", style);
   }
 
   private void createCell(Row row, int columnCount, Object value, CellStyle style) {
@@ -47,11 +46,12 @@ public class UserEXCELExporter {
       cell.setCellValue((Integer) value);
     } else if (value instanceof Boolean) {
       cell.setCellValue((Boolean) value);
-    }else {
+    } else {
       cell.setCellValue((String) value);
     }
     cell.setCellStyle(style);
   }
+
   private void writeDataRows() {
     int rowCount = 1;
     CellStyle style = workbook.createCellStyle();
@@ -67,10 +67,8 @@ public class UserEXCELExporter {
       createCell(row, columnCount++, user.getEmail(), style);
       createCell(row, columnCount++, user.isEnabled(), style);
       createCell(row, columnCount++, user.getUserTypeId().toString(), style);
-
     }
   }
-
 
   public void export(HttpServletResponse response) throws IOException {
     writeHeaderRow();

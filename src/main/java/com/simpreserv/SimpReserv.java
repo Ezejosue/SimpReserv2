@@ -9,5 +9,4 @@ public class SimpReserv {
   public static void main(String[] args) {
     SpringApplication.run(SimpReserv.class, args);
   }
-
 }

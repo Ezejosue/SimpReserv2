@@ -19,29 +19,28 @@ public class UserRepositoryTests {
   @Autowired private TestEntityManager entityManager;
 
   @Test
-  public void testAddNew(){
+  public void testAddNew() {
     User user = new User();
     user.setEmail("cazooklei@gmail.com");
     user.setPassword("user2345");
     User savedUser = repo.save(user);
-    User existUser = entityManager.find(User.class,savedUser.getUserId());
+    User existUser = entityManager.find(User.class, savedUser.getUserId());
     Assertions.assertThat(existUser.getEmail()).isEqualTo(user.getEmail());
     Assertions.assertThat(savedUser).isNotNull();
     Assertions.assertThat(savedUser.getUserId()).isGreaterThan(0);
-
   }
 
   @Test
-  public void testListAll(){
+  public void testListAll() {
     Iterable<User> users = repo.findAll();
     Assertions.assertThat(users).hasSizeGreaterThan(0);
-    for (User user : users){
+    for (User user : users) {
       System.out.println(user);
     }
   }
 
   @Test
-  public void testUpdate(){
+  public void testUpdate() {
     Integer userid = 3;
     Optional<User> optionalUser = repo.findById(userid);
     User user = optionalUser.get();
@@ -53,7 +52,7 @@ public class UserRepositoryTests {
   }
 
   @Test
-  public void testGet(){
+  public void testGet() {
     Integer userid = 1;
     Optional<User> optionalUser = repo.findById(userid);
     Assertions.assertThat(optionalUser).isPresent();
@@ -61,7 +60,7 @@ public class UserRepositoryTests {
   }
 
   @Test
-  public void testDelete(){
+  public void testDelete() {
     Integer userid = 1;
     repo.deleteById(userid);
     Optional<User> optionalUser = repo.findById(userid);
@@ -69,7 +68,7 @@ public class UserRepositoryTests {
   }
 
   @Test
-  public void testFindUserByEmail(){
+  public void testFindUserByEmail() {
     String email = "aezequiel56@gmail.com";
     User user = repo.findByEmail(email);
     Assertions.assertThat(user).isNotNull();

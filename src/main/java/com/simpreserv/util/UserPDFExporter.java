@@ -64,7 +64,7 @@ public class UserPDFExporter {
     PdfPTable table = new PdfPTable(4);
     table.setWidthPercentage(100);
     table.setSpacingBefore(15);
-    table.setWidths(new float[] {1.5f, 3.5f, 3.0f, 1.5f} );
+    table.setWidths(new float[] {1.5f, 3.5f, 3.0f, 1.5f});
     writeTableHeader(table);
     writeTableData(table);
     document.add(table);

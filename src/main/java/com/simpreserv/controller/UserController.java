@@ -1,10 +1,10 @@
 package com.simpreserv.controller;
 
+import com.simpreserv.model.NotFoundException;
+import com.simpreserv.model.User;
+import com.simpreserv.service.UserService;
 import com.simpreserv.util.UserEXCELExporter;
 import com.simpreserv.util.UserPDFExporter;
-import com.simpreserv.model.User;
-import com.simpreserv.model.NotFoundException;
-import com.simpreserv.service.UserService;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,8 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class UserController {
 
-  @Autowired
-  private UserService userService;
+  @Autowired private UserService userService;
 
   @GetMapping("/users")
   public String showUsersList(Model model, @Param("keyword") String keyword) {
@@ -51,7 +50,6 @@ public class UserController {
     ra.addFlashAttribute("message", "The user has been saved successfully!!");
     return "redirect:/users";
   }
-
 
   @GetMapping("/users/edit/{id}")
   public String showEditForm(@PathVariable("id") Integer id, Model model, RedirectAttributes ra) {
@@ -84,7 +82,7 @@ public class UserController {
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
     String currentDateTime = dateFormat.format(new Date());
     String headerKey = "Content-Disposition";
-    String headerValue = "attachment; filename=users_"+currentDateTime+".pdf";
+    String headerValue = "attachment; filename=users_" + currentDateTime + ".pdf";
 
     response.setHeader(headerKey, headerValue);
 
@@ -99,7 +97,7 @@ public class UserController {
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
     String currentDateTime = dateFormat.format(new Date());
     String headerKey = "Content-Disposition";
-    String headerValue = "attachment; filename=users_"+currentDateTime+".xlsx";
+    String headerValue = "attachment; filename=users_" + currentDateTime + ".xlsx";
 
     response.setHeader(headerKey, headerValue);
     List<User> userList = userService.listAll();
