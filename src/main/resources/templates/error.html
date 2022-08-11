@@ -5,6 +5,15 @@
   <title>404 Error</title>
 </head>
 <style>
+  .home{
+    text-align: center;
+    margin: 0 auto;
+  }
+  .home a{
+    color: #709abf;
+    font-size: 20px;
+    text-decoration: none;
+  }
   .main{
     margin-top: 15%;
   }
@@ -134,6 +143,9 @@
 </style>
 <body>
 <div class="main">
+  <div class="home">
+    <a th:href="@{/}">CLICK TO HOME</a>
+  </div>
   <div>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 355">
       <g id="ocean">
@@ -436,5 +448,6 @@
     </svg>
   </div>
 </div>
+
 </body>
 </html>
