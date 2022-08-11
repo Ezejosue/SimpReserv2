@@ -2,8 +2,18 @@ package com.simpreserv.controller;
 
 import com.simpreserv.model.Client;
 import com.simpreserv.model.NotFoundException;
+import com.simpreserv.model.User;
 import com.simpreserv.service.ClientService;
+import com.simpreserv.util.ClientEXCELExporter;
+import com.simpreserv.util.ClientPDFExporter;
+import com.simpreserv.util.UserEXCELExporter;
+import com.simpreserv.util.UserPDFExporter;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -63,5 +73,34 @@ public class ClientController {
       ra.addFlashAttribute("message", e.getMessage());
     }
     return "redirect:/clients";
+  }
+
+  @GetMapping("/clients/export")
+  public void exportToPDF(HttpServletResponse response) throws IOException {
+    response.setContentType("application/pdf");
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+    String currentDateTime = dateFormat.format(new Date());
+    String headerKey = "Content-Disposition";
+    String headerValue = "attachment; filename=clients_" + currentDateTime + ".pdf";
+
+    response.setHeader(headerKey, headerValue);
+
+    List<Client> clientList = clientService.listAll();
+    ClientPDFExporter exporter = new ClientPDFExporter(clientList);
+    exporter.export(response);
+  }
+
+  @GetMapping("/clients/exportEXCEL")
+  public void exportToEXCEL(HttpServletResponse response) throws IOException {
+    response.setContentType("application/octet-stream");
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+    String currentDateTime = dateFormat.format(new Date());
+    String headerKey = "Content-Disposition";
+    String headerValue = "attachment; filename=clients_" + currentDateTime + ".xlsx";
+
+    response.setHeader(headerKey, headerValue);
+    List<Client> clientList = clientService.listAll();
+    ClientEXCELExporter excelExporter = new ClientEXCELExporter(clientList);
+    excelExporter.export(response);
   }
 }

@@ -13,6 +13,10 @@ public class ClientService {
 
   @Autowired private ClientRepository clientRepository;
 
+  public List<Client> listAll(){
+    return clientRepository.findAll();
+  }
+
   public List<Client> listAll(String keyword) {
     if (keyword != null) {
       return clientRepository.findAll(keyword);
