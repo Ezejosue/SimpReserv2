@@ -101,6 +101,14 @@
       </tboby>
     </table>
     </div>
+    <div>&nbsp;</div>
+    <div>
+      Total Items: [[${totalItems}]] - Page [[${currentPage}]] of [[${totalPages}]]
+      &nbsp; - &nbsp;
+      <span th:each="i:${#numbers.sequence(1, totalPages)}">
+        <a  th:href="@{'/page/' + ${i}}">[[${i}]]</a> &nbsp;&nbsp;
+      </span>
+    </div>
 
   </div>
 

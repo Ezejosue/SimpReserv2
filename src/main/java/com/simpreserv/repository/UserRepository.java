@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
+
   Long countByUserId(Integer userId);
 
   @Query("SELECT u FROM User u WHERE u.email = ?1")
@@ -15,4 +16,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
   @Query("SELECT u FROM User u WHERE CONCAT(u.userId, u.userTypeId, u.email, u.enabled) LIKE %?1%")
   public List<User> findAll(String keyword);
+
 }

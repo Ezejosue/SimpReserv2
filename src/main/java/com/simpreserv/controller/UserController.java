@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -27,10 +28,28 @@ public class UserController {
   @Autowired private UserService userService;
 
   @GetMapping("/users")
-  public String showUsersList(Model model, @Param("keyword") String keyword) {
-    List<User> listUsers = userService.listAll(keyword);
+  public String showUsersListPage(Model model, @Param("keyword") String keyword) {
+    if (keyword!=null){
+      List<User> listUsers = userService.listAll(keyword);
+      model.addAttribute("listUsers", listUsers);
+      model.addAttribute("keyword", keyword);
+      return "users";
+    } else {
+      return listByPage(model, 1);
+    }
+  }
+
+
+  @GetMapping("/page/{pageNumber}")
+  public String listByPage(Model model, @PathVariable("pageNumber") int currentPage){
+    Page<User> page = userService.listAll(currentPage);
+    long totalItems = page.getTotalElements();
+    int totalPages = page.getTotalPages();
+    List<User> listUsers = page.getContent();
+    model.addAttribute("currentPage", currentPage);
+    model.addAttribute("totalItems", totalItems);
+    model.addAttribute("totalPages", totalPages);
     model.addAttribute("listUsers", listUsers);
-    model.addAttribute("keyword", keyword);
     return "users";
   }
 
@@ -86,7 +105,7 @@ public class UserController {
 
     response.setHeader(headerKey, headerValue);
 
-    List<User> userList = userService.listAll();
+    List<User> userList = userService.listAllForReport();
     UserPDFExporter exporter = new UserPDFExporter(userList);
     exporter.export(response);
   }
@@ -100,7 +119,7 @@ public class UserController {
     String headerValue = "attachment; filename=users_" + currentDateTime + ".xlsx";
 
     response.setHeader(headerKey, headerValue);
-    List<User> userList = userService.listAll();
+    List<User> userList = userService.listAllForReport();
     UserEXCELExporter excelExporter = new UserEXCELExporter(userList);
     excelExporter.export(response);
   }
