@@ -1,6 +1,7 @@
 package com.simpreserv.model;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +13,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-@ApiModel(description = "")
+
+@ApiModel(description = "Clients' entity information and details.")
 @Entity
 @Table(name = "CLIENTS")
 public class Client {
@@ -23,6 +25,7 @@ public class Client {
   @Setter
   private Integer clientId;
 
+  @ApiModelProperty(notes = "Should take the date only on inserts.")
   @CreationTimestamp
   @Column(name = "create_time", updatable = false)
   @Getter
