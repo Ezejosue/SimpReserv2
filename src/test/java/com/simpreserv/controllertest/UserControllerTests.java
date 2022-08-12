@@ -5,7 +5,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.simpreserv.controller.UserController;
 import com.simpreserv.model.User;
 import com.simpreserv.service.UserService;
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,15 +18,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @WebMvcTest(UserController.class)
 public class UserControllerTests {
 
-  @Autowired
-  private MockMvc mockMvc;
-  @MockBean
-  private UserService userService;
+  @Autowired private MockMvc mockMvc;
+  @MockBean private UserService userService;
 
   @Test
   public void testExportExcel() throws Exception {
@@ -37,10 +33,10 @@ public class UserControllerTests {
     userList.add(new User(3, null, null, "adeee", "123", false, 1, 1));
     Mockito.when(userService.listAll()).thenReturn(userList);
     String url = "/users/exportEXCEL";
-    MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(url)).andExpect(status().isOk()).andReturn();
+    MvcResult mvcResult =
+        mockMvc.perform(MockMvcRequestBuilders.get(url)).andExpect(status().isOk()).andReturn();
     byte[] bytes = mvcResult.getResponse().getContentAsByteArray();
     Path path = Paths.get("users.xlsx");
     Files.write(path, bytes);
   }
-
 }
