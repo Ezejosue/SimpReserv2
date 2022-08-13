@@ -29,7 +29,7 @@ public class UserController {
 
   @GetMapping("/users")
   public String showUsersListPage(Model model, @Param("keyword") String keyword) {
-    if (keyword!=null){
+    if (keyword != null) {
       List<User> listUsers = userService.listAll(keyword);
       model.addAttribute("listUsers", listUsers);
       model.addAttribute("keyword", keyword);
@@ -39,9 +39,8 @@ public class UserController {
     }
   }
 
-
   @GetMapping("/page/{pageNumber}")
-  public String listByPage(Model model, @PathVariable("pageNumber") int currentPage){
+  public String listByPage(Model model, @PathVariable("pageNumber") int currentPage) {
     Page<User> page = userService.listAll(currentPage);
     long totalItems = page.getTotalElements();
     int totalPages = page.getTotalPages();
