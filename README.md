@@ -36,7 +36,7 @@ This section should list any major frameworks that you built your project using.
 * [Hibernate](https://hibernate.org/)
 * [Thymeleaf](https://www.thymeleaf.org/)
 * [SpringDataJPA](https://spring.io/projects/spring-data-jpa)
-* [Maevn](https://maven.apache.org/)
+* [Maven](https://maven.apache.org/)
 
 
 
