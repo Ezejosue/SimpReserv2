@@ -43,7 +43,7 @@ public class ClientController {
   @PostMapping("/clients/save")
   public String saveClient(Client client, RedirectAttributes ra) {
     clientService.save(client);
-    ra.addFlashAttribute("message", "The client has been saved succesfully!!");
+    ra.addFlashAttribute("message", "The client has been saved successfully!!");
     return "redirect:/clients";
   }
 

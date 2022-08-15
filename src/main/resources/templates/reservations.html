@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Reservations</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.css}">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">SimpReserv</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/login}">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/register}">Register</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/users}">Users</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/employees}">Employees</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/clients}">Clients</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/reservations}">Reservations</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container-fluid text-center">
+  <form th:action="@{/logout}" method="post">
+    <p>
+      Welcome <b>[[${#request.userPrincipal.principal.Username}]]</b>
+    </p>
+    <input type="submit" value="Sign Out">
+  </form>
+  <div>
+    <h2>Manage Reservations</h2>
+  </div>
+  <div class="m-2">
+    <a class="h3" th:href="@{/reservations/new}">Add New reservation</a>
+    |&nbsp;
+    <a class="h3" th:href="@{/reservations/export}">Export to PDF</a>
+    |&nbsp;
+    <a class="h3" th:href="@{/reservations/exportEXCEL}">Export to EXCEL</a>
+  </div>
+  <div>
+      &nbsp;
+  </div>
+  <div>
+    <form th:action="@{/reservations}" th:value="${keyword}">
+      Filter: <input type="text" name="keyword" required>
+      &nbsp;
+      <input type="submit" value="Search">
+      &nbsp;
+      <input type="button" value="Clear" onclick="clearFilter()">
+    </form>
+  </div>
+  <div>
+    &nbsp;
+  </div>
+  <div th:if="${message}" class="alert alert-success text-center">
+    [[${message}]]
+  </div>
+  <div>
+    <div>
+
+    <table class="table table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>checkinDate</th>
+          <th>checkoutDate</th>
+          <th>reservationBalance</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tboby>
+        <th:block th:each="reservation : ${reservationList}">
+          <tr>
+            <td>[[${reservation.idReservation}]]</td>
+            <td>[[${reservation.checkinDate}]]</td>
+            <td>[[${reservation.checkoutDate}]]</td>
+            <td>[[${reservation.reservationBalance}]]</td>
+            <td>
+              <a class="h4 mr-3" th:href="@{'/reservations/edit/' + ${reservation.idReservation}}">Edit</a>
+              <a class="h4" th:href="@{'/reservations/delete/' + ${reservation.idReservation}}">Delete</a>
+            </td>
+          </tr>
+        </th:block>
+      </tboby>
+    </table>
+    </div>
+
+  </div>
+
+</div>
+<script type="text/javascript">
+  function clearFilter() {
+    window.location = "/reservations"
+  }
+</script>
+</body>
+</html>
