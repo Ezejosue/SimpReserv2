@@ -16,8 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class ReservationController {
 
-  @Autowired
-  private ReservationService reservationService;
+  @Autowired private ReservationService reservationService;
 
   @GetMapping("/reservations")
   public String showReservationsList(Model model, @Param("keyword") String keyword) {
@@ -54,7 +53,6 @@ public class ReservationController {
       return "redirect:/reservations";
     }
   }
-
 
   @GetMapping("/reservations/delete/{id}")
   public String deleteReservation(@PathVariable("id") Integer id, RedirectAttributes ra) {

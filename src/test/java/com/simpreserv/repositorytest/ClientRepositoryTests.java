@@ -1,7 +1,5 @@
 package com.simpreserv.repositorytest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.simpreserv.model.Client;
 import com.simpreserv.repository.ClientRepository;
 import java.util.List;

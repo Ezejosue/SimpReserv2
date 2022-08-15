@@ -15,16 +15,14 @@ import org.springframework.test.annotation.Rollback;
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(value = false)
 public class ReservationRepositoryTest {
-  @Autowired
-  private TestEntityManager testEntityManager;
-  @Autowired
-  private ReservationRepository repository;
+  @Autowired private TestEntityManager testEntityManager;
+  @Autowired private ReservationRepository repository;
 
   @Test
-  public void testListAllReservation(){
+  public void testListAllReservation() {
     Iterable<Reservation> reservations = repository.findAll();
     Assertions.assertThat(reservations).hasSizeGreaterThan(0);
-    for (Reservation reservation : reservations){
+    for (Reservation reservation : reservations) {
       System.out.println(reservation);
     }
   }

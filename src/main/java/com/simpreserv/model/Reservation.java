@@ -1,7 +1,6 @@
 package com.simpreserv.model;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,17 +34,11 @@ public class Reservation {
   @Setter
   private Timestamp updateTime;
 
-  @Getter
-  @Setter
-  private String checkinDate;
+  @Getter @Setter private String checkinDate;
 
-  @Getter
-  @Setter
-  private String checkoutDate;
+  @Getter @Setter private String checkoutDate;
 
-  @Getter
-  @Setter
-  private Float reservationBalance;
+  @Getter @Setter private Float reservationBalance;
 
   @Column(name = "EMPLOYEE_employee_id", nullable = false)
   @Getter
@@ -67,12 +60,19 @@ public class Reservation {
   @Setter
   private Integer reservationStatus;
 
-  public Reservation() {
-  }
+  public Reservation() {}
 
-  public Reservation(Integer idReservation, Timestamp createTime, Timestamp updateTime,
-      String checkinDate, String checkoutDate, Float reservationBalance, Integer employeeId,
-      Integer clientId, Integer roomId, Integer reservationStatus) {
+  public Reservation(
+      Integer idReservation,
+      Timestamp createTime,
+      Timestamp updateTime,
+      String checkinDate,
+      String checkoutDate,
+      Float reservationBalance,
+      Integer employeeId,
+      Integer clientId,
+      Integer roomId,
+      Integer reservationStatus) {
     this.idReservation = idReservation;
     this.createTime = createTime;
     this.updateTime = updateTime;
@@ -87,17 +87,27 @@ public class Reservation {
 
   @Override
   public String toString() {
-    return "Reservation{" +
-        "idReservation=" + idReservation +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", checkinDate=" + checkinDate +
-        ", checkoutDate=" + checkoutDate +
-        ", reservationBalance=" + reservationBalance +
-        ", employeeId=" + employeeId +
-        ", clientId=" + clientId +
-        ", roomId=" + roomId +
-        ", reservationStatus=" + reservationStatus +
-        '}';
+    return "Reservation{"
+        + "idReservation="
+        + idReservation
+        + ", createTime="
+        + createTime
+        + ", updateTime="
+        + updateTime
+        + ", checkinDate="
+        + checkinDate
+        + ", checkoutDate="
+        + checkoutDate
+        + ", reservationBalance="
+        + reservationBalance
+        + ", employeeId="
+        + employeeId
+        + ", clientId="
+        + clientId
+        + ", roomId="
+        + roomId
+        + ", reservationStatus="
+        + reservationStatus
+        + '}';
   }
 }

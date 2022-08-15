@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 
-  @Query("SELECT r FROM Reservation r WHERE CONCAT(r.employeeId,r.reservationBalance,r.idReservation) LIKE %?1%")
+  @Query(
+      "SELECT r FROM Reservation r WHERE CONCAT(r.employeeId,r.reservationBalance,r.idReservation) LIKE %?1%")
   public List<Reservation> findAll(String keyword);
+
   Long countByIdReservation(Integer idReservation);
 }
